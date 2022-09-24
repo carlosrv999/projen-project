@@ -10,6 +10,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
   name: 'projen-project',
   repositoryUrl: 'https://github.com/carlosrv125/projen-project.git',
   keywords: ['sample', "awscdk", "aws-cdk"],
+  releaseWorkflow: true,
+  releaseToNpm: true,
+  releaseEveryCommit: true,
   deps: [
     `@aws-cdk/aws-apigatewayv2-alpha@${cdkVersion}-alpha.0`,
     `@aws-cdk/aws-apigatewayv2-integrations-alpha@${cdkVersion}-alpha.0`,
