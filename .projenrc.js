@@ -9,7 +9,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   defaultReleaseBranch: 'main',
   name: 'projen-project',
   repositoryUrl: 'https://github.com/carlosrv125/projen-project.git',
-  keywords: ['sample', "awscdk", "aws-cdk"],
+  keywords: ['sample', 'awscdk', 'aws-cdk'],
   releaseWorkflow: true,
   releaseToNpm: true,
   releaseEveryCommit: true,
