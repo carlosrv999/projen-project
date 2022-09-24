@@ -1,0 +1,118 @@
+{
+  "version": "21.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "MyStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "MyStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "MyStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "MyStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/bbdfd8c1dc2873dca4ddb76b3153ffa0572f8e5e897cdf18c094b5a5f7fd1e06.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "MyStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "MyStack.assets"
+      ],
+      "metadata": {
+        "/MyStack/Cdk-Sample-Lib/HelloWorld/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkSampleLibHelloWorldServiceRole47245453"
+          }
+        ],
+        "/MyStack/Cdk-Sample-Lib/HelloWorld/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkSampleLibHelloWorldBD0A3465"
+          }
+        ],
+        "/MyStack/Cdk-Sample-Lib/API/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkSampleLibAPI6FD5D6E6"
+          }
+        ],
+        "/MyStack/Cdk-Sample-Lib/API/DefaultRoute/LambdaIntegration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkSampleLibAPIDefaultRouteLambdaIntegrationC35FD522"
+          }
+        ],
+        "/MyStack/Cdk-Sample-Lib/API/DefaultRoute/LambdaIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkSampleLibAPIDefaultRouteLambdaIntegrationPermission7A218998"
+          }
+        ],
+        "/MyStack/Cdk-Sample-Lib/API/DefaultRoute/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkSampleLibAPIDefaultRouteECF6CA84"
+          }
+        ],
+        "/MyStack/Cdk-Sample-Lib/API/DefaultStage/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkSampleLibAPIDefaultStage53EE2902"
+          }
+        ],
+        "/MyStack/Cdk-Sample-Lib/ApiURL": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkSampleLibApiURL32C6192A"
+          }
+        ],
+        "/MyStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/MyStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/MyStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/MyStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "MyStack"
+    }
+  }
+}

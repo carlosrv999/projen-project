@@ -1,0 +1,358 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.0.5"
+        }
+      },
+      "MyStack": {
+        "id": "MyStack",
+        "path": "MyStack",
+        "children": {
+          "Cdk-Sample-Lib": {
+            "id": "Cdk-Sample-Lib",
+            "path": "MyStack/Cdk-Sample-Lib",
+            "children": {
+              "HelloWorld": {
+                "id": "HelloWorld",
+                "path": "MyStack/Cdk-Sample-Lib/HelloWorld",
+                "children": {
+                  "ServiceRole": {
+                    "id": "ServiceRole",
+                    "path": "MyStack/Cdk-Sample-Lib/HelloWorld/ServiceRole",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "MyStack/Cdk-Sample-Lib/HelloWorld/ServiceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                  ]
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.43.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.43.1"
+                    }
+                  },
+                  "Code": {
+                    "id": "Code",
+                    "path": "MyStack/Cdk-Sample-Lib/HelloWorld/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "MyStack/Cdk-Sample-Lib/HelloWorld/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.43.1"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "MyStack/Cdk-Sample-Lib/HelloWorld/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.43.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.43.1"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "MyStack/Cdk-Sample-Lib/HelloWorld/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "code": {
+                          "s3Bucket": {
+                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                          },
+                          "s3Key": "5ebde86ed4458f530536520258f2281e9e622263db7f1bdb8e8b779b420c466a.zip"
+                        },
+                        "role": {
+                          "Fn::GetAtt": [
+                            "CdkSampleLibHelloWorldServiceRole47245453",
+                            "Arn"
+                          ]
+                        },
+                        "handler": "index.handler",
+                        "runtime": "nodejs16.x"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                      "version": "2.43.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.Function",
+                  "version": "2.43.1"
+                }
+              },
+              "API": {
+                "id": "API",
+                "path": "MyStack/Cdk-Sample-Lib/API",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "MyStack/Cdk-Sample-Lib/API/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Api",
+                      "aws:cdk:cloudformation:props": {
+                        "name": "API",
+                        "protocolType": "HTTP"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnApi",
+                      "version": "2.43.1"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "MyStack/Cdk-Sample-Lib/API/DefaultRoute",
+                    "children": {
+                      "LambdaIntegration": {
+                        "id": "LambdaIntegration",
+                        "path": "MyStack/Cdk-Sample-Lib/API/DefaultRoute/LambdaIntegration",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "MyStack/Cdk-Sample-Lib/API/DefaultRoute/LambdaIntegration/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
+                              "aws:cdk:cloudformation:props": {
+                                "apiId": {
+                                  "Ref": "CdkSampleLibAPI6FD5D6E6"
+                                },
+                                "integrationType": "AWS_PROXY",
+                                "integrationUri": {
+                                  "Fn::GetAtt": [
+                                    "CdkSampleLibHelloWorldBD0A3465",
+                                    "Arn"
+                                  ]
+                                },
+                                "payloadFormatVersion": "2.0"
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
+                              "version": "2.43.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
+                          "version": "2.43.1-alpha.0"
+                        }
+                      },
+                      "LambdaIntegration-Permission": {
+                        "id": "LambdaIntegration-Permission",
+                        "path": "MyStack/Cdk-Sample-Lib/API/DefaultRoute/LambdaIntegration-Permission",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                          "aws:cdk:cloudformation:props": {
+                            "action": "lambda:InvokeFunction",
+                            "functionName": {
+                              "Fn::GetAtt": [
+                                "CdkSampleLibHelloWorldBD0A3465",
+                                "Arn"
+                              ]
+                            },
+                            "principal": "apigateway.amazonaws.com",
+                            "sourceArn": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:",
+                                  {
+                                    "Ref": "AWS::Partition"
+                                  },
+                                  ":execute-api:",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "AWS::AccountId"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "CdkSampleLibAPI6FD5D6E6"
+                                  },
+                                  "/*/*"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                          "version": "2.43.1"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "MyStack/Cdk-Sample-Lib/API/DefaultRoute/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "CdkSampleLibAPI6FD5D6E6"
+                            },
+                            "routeKey": "$default",
+                            "authorizationType": "NONE",
+                            "target": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "integrations/",
+                                  {
+                                    "Ref": "CdkSampleLibAPIDefaultRouteLambdaIntegrationC35FD522"
+                                  }
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                          "version": "2.43.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
+                      "version": "2.43.1-alpha.0"
+                    }
+                  },
+                  "DefaultStage": {
+                    "id": "DefaultStage",
+                    "path": "MyStack/Cdk-Sample-Lib/API/DefaultStage",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "MyStack/Cdk-Sample-Lib/API/DefaultStage/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Stage",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "CdkSampleLibAPI6FD5D6E6"
+                            },
+                            "stageName": "$default",
+                            "autoDeploy": true
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnStage",
+                          "version": "2.43.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpStage",
+                      "version": "2.43.1-alpha.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpApi",
+                  "version": "2.43.1-alpha.0"
+                }
+              },
+              "ApiURL": {
+                "id": "ApiURL",
+                "path": "MyStack/Cdk-Sample-Lib/ApiURL",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.43.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "projen-project.CdkSampleLib",
+              "version": "0.0.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "MyStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "MyStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.43.1"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "MyStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.43.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.5"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.43.1"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.43.1"
+    }
+  }
+}

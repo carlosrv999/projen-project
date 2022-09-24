@@ -1,11 +1,19 @@
 const { awscdk } = require('projen');
+
+const cdkVersion = '2.43.1';
+
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Carlos Ramirez',
   authorAddress: 'carlosrv125@icloud.com',
-  cdkVersion: '2.1.0',
+  cdkVersion,
   defaultReleaseBranch: 'main',
   name: 'projen-project',
   repositoryUrl: 'https://github.com/carlosrv125/projen-project.git',
+  keywords: ['sample', "awscdk", "aws-cdk"],
+  deps: [
+    `@aws-cdk/aws-apigatewayv2-alpha@${cdkVersion}-alpha.0`,
+    `@aws-cdk/aws-apigatewayv2-integrations-alpha@${cdkVersion}-alpha.0`,
+  ],
 
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
